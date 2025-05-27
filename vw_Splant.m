@@ -17,13 +17,20 @@ sizes = simsizes;
 sizes.NumContStates  = 4;
 sizes.NumDiscStates  = 0;
 sizes.NumOutputs     = 2;
-sizes.NumInputs      = 2;
+sizes.NumInputs      = 3;
 sizes.DirFeedthrough = 0;
 sizes.NumSampleTimes = 1;
 sys = simsizes(sizes);
-% x0  = [0,0,0,0];%S1
-% x0  = [-50,100,50,-100];%S2
-x0  = [100,200,100,200];%S3
+switch ParameterConfig.InitSatesType
+case 1
+    x0  = [0,0,0,0];%S1
+case 2
+    x0  = [-50,100,50,-100];%S2
+case 3
+    x0  = [100,200,100,200];%S3
+otherwise
+    x0  = [0,0,0,0];%S1
+end
 str = [];
 ts  = [0 0];
 
@@ -32,7 +39,16 @@ u1=u(1);
 u2=u(2);
 I=4*10^-4;
 c=0.0022;
-tauL=0.01*sin(t);
+switch ParameterConfig.DisturbanceType
+case 1
+    tauL=0.1*sin(t);%S1
+case 2
+    tauL=1*sin(3*t);%S2
+case 3
+    tauL=tanh(u(3));%S3
+otherwise
+    tauL=0.1*sin(3*t);%S1
+end
 L=2.7;
 Kb=0.05;
 R=0.4;

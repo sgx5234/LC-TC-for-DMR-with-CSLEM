@@ -21,9 +21,16 @@ sizes.NumInputs      = 2;
 sizes.DirFeedthrough = 0;
 sizes.NumSampleTimes = 1;
 sys = simsizes(sizes);
-% x0  = [0.6,-1.4,3*pi/8];%S1
-% x0  = [-0.6,-0.10,-1*pi/4];%S2
-x0  = [-0.8,-1.4,2*pi/4];%S3
+switch ParameterConfig.InitSatesType
+case 1
+    x0  = [0.6,-1.4,3*pi/8];%S1
+case 2
+    x0  = [-0.6,-0.10,-1*pi/4];%S2
+case 3
+    x0  = [-0.8,-1.4,2*pi/4];%S3
+otherwise
+    x0  = [0.6,-1.4,3*pi/8];%S1
+end
 str = [];
 ts  = [0 0];
 

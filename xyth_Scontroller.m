@@ -58,7 +58,7 @@ end
 eths = th-ths;
 eths = thNormalization(eths);
 
-kd = 25;
+kd = 50;
 kth = 10;
 epsilon_d = 0.1;
 epsilon_th = 0.1;
@@ -71,12 +71,9 @@ alpha_d = kd*LowComplexityFun(d,rho_d);
 rou_the = (rho_th0-epsilon_th)*smoothTfun1((T-t)/T)+epsilon_th;
 alpha_th = -kth*LowComplexityFun(eths,rou_the);
 
-uv = alpha_d;
-uw = alpha_th;
-
-sys(1) = uv;
-sys(2) = uw;
-sys(3) = ths;%thr,ths,thd
+sys(1) = alpha_d;
+sys(2) = alpha_th;
+sys(3) = ths;
 sys(4) = rho_d;
 sys(5) = rou_the;
 
